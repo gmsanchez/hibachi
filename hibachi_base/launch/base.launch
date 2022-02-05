@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<launch>
+    <node name="hibachi_base_node" pkg="hibachi_base" type="hibachi_base_node" output="screen">
+        <param name="control_frequency" value="10.0" />
+        <param name="max_speed" value="0.5" />
+    </node>
+</launch>
