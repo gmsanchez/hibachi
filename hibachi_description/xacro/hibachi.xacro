@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+
+<robot name="hibachi" xmlns:xacro="http://ros.org/wiki/xacro">
+
+    <xacro:include filename="$(find hibachi_description)/xacro/wheel.xacro" />
+
+    <xacro:property name="PI" value="3.14159" />
+
+    <!-- ENU -->
+    <xacro:property name="x_reference_heading" value="90.0" />
+
+    <!-- Wheel mounting positions  -->
+    <!--  Wheel distance between front and rear -->
+    <xacro:property name="wheel_distance" value="0.2" />
+    <!-- Wheel distance between left and right side -->
+    <xacro:property name="wheel_separation" value="0.33" />
+
+    <!-- <xacro:property name="wheel_vertical_offset" value="0.0325" /> -->
+    <!-- <xacro:property name="wheel_vertical_offset" value="0.06" /> -->
+    <!-- <xacro:property name="footprint_vertical_offset" value="-0.0655" /> -->
+
+    <!-- Wheel properties -->
+    <!-- <xacro:property name="wheel_radius" value="0.0325" /> -->
+    <!-- <xacro:property name="wheel_width" value="0.025" /> -->
+    <xacro:property name="wheel_radius" value="0.06" />
+    <xacro:property name="wheel_width" value="0.06" />
+
+    <!-- Chassis size -->
+    <xacro:property name="chassis_x_size" value="0.40" />
+    <xacro:property name="chassis_y_size" value="0.25" />
+    <xacro:property name="chassis_z_size" value="0.05" />
+
+    <xacro:property name="dummy_inertia" value="1e-09"/>
+
+
+    <!-- Base link is the center of the robot's bottom plate -->
+    <link name="base_link">
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <mesh filename="package://hibachi_description/meshes/robot_base.dae" />
+            </geometry>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0"/>
+            <geometry>
+                <box size="${chassis_x_size} ${chassis_y_size} ${chassis_z_size}"/>
+            </geometry>
+        </collision>
+    </link>
+
+    <!-- Base footprint is on the ground under the robot -->
+    <link name="base_footprint"/>
+    <joint name="base_footprint_joint" type="fixed">
+        <origin xyz="0 0 ${-wheel_radius}" rpy="0 0 0" />
+        <parent link="base_link" />
+        <child link="base_footprint" />
+    </joint>
+
+    <!-- Interial link stores the robot's inertial information -->
+    <link name="inertial_link">
+        <inertial>
+            <mass value="2.5"/>
+            <origin xyz="0.0 0 0"/>
+            <inertia
+                ixx="0.019995" ixy="0.0" ixz="0.0"
+                iyy="0.019995" iyz="0.0" izz="0.03675" />
+        </inertial>
+    </link>
+
+    <joint name="inertial_joint" type="fixed">
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <parent link="base_link" />
+        <child link="inertial_link" />
+    </joint>
+
+    <!-- Wheel macros -->
+    <xacro:hibachi_wheel wheel_prefix="front_left">
+        <origin xyz="${wheel_distance/2} ${wheel_separation/2} 0" rpy="0 0 0" />
+    </xacro:hibachi_wheel>
+    <xacro:hibachi_wheel wheel_prefix="front_right">
+        <origin xyz="${wheel_distance/2} ${-wheel_separation/2} 0" rpy="0 0 0" />
+    </xacro:hibachi_wheel>
+    <xacro:hibachi_wheel wheel_prefix="rear_left">
+        <origin xyz="${-wheel_distance/2} ${wheel_separation/2} 0" rpy="0 0 0" />
+    </xacro:hibachi_wheel>
+    <xacro:hibachi_wheel wheel_prefix="rear_right">
+        <origin xyz="${-wheel_distance/2} ${-wheel_separation/2} 0" rpy="0 0 0" />
+    </xacro:hibachi_wheel>
+</robot>
