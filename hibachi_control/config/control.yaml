@@ -8,6 +8,12 @@ hibachi_velocity_controller:
   right_wheel: ['front_right_wheel', 'rear_right_wheel']
   publish_rate: 10
 
+  # The number of velocity samples to average together to compute the odometry
+  velocity_rolling_window_size: 5
+  # Use velocity to estimate odometry, because we are using Clearpath's diff_drive_controller
+  pose_from_joint_position: False
+  twist_from_joint_position: False
+
   pose_covariance_diagonal: [0.001, 0.001, 100.0, 100.0, 100.0, 0.03]
   twist_covariance_diagonal: [0.001, 0.001, 0.001, 100.0, 100.0, 0.03]
 
@@ -19,23 +25,23 @@ hibachi_velocity_controller:
   k_l: 0.1
   k_r: 0.1
 
-  enable_odom_tf: True
+  enable_odom_tf: False # True
 
   # Wheel separation and radius multipliers
-  wheel_separation_multiplier: 1.0 # default: 1.0
-  wheel_radius_multiplier    : 1.15 # default: 1.0
+  wheel_separation_multiplier: 1.4 # default: 1.0
+  wheel_radius_multiplier    : 1.0 # default: 1.0
 
   # Velocity and acceleration limits
   # Whenever a min_* is unspecified, default to -max_*
   linear:
     x:
       has_velocity_limits    : true
-      max_velocity           : 0.5   # m/s
+      max_velocity           : 0.8   # m/s
       has_acceleration_limits: true
       max_acceleration       : 5.0   # m/s^2
   angular:
     z:
       has_velocity_limits    : true
-      max_velocity           : 2.0   # rad/s
+      max_velocity           : 4.0   # rad/s
       has_acceleration_limits: true
       max_acceleration       : 10.0  # rad/s^2
