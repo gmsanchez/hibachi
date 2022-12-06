@@ -1,8 +1,0 @@
-<?xml version="1.0"?>
-<launch>
-    <!-- Load hardware interface -->
-    <include file="$(find hibachi_base)/launch/base.launch" />
-
-    <!-- Load controller -->
-    <include file="$(find hibachi_control)/launch/control.launch" />
-</launch>
