@@ -68,6 +68,7 @@ private:
   hibachi_base::SerialPort serial_port;
   bool openSerial();
   void closeSerial();
+  bool setupPIDGains(const double &kP, const double &kI, const double &kD);
 
   // ROS Control interfaces
   hardware_interface::JointStateInterface joint_state_interface;
@@ -83,6 +84,10 @@ private:
   std::vector<double> joint_last_position;
   std::vector<double> joint_velocity;
   std::vector<double> joint_effort;
+
+  // Pub commands
+  ros::Publisher front_right_pub, front_left_pub, rear_right_pub, rear_left_pub;
+  
 
   // Commands
   std::vector<double> joint_velocity_command;

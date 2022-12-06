@@ -1,4 +1,5 @@
 #include "hibachi_base/hibachi_hardware.h"
+#include <geometry_msgs/Twist.h>
 
 namespace hibachi_base {
 HibachiHardware::HibachiHardware(ros::NodeHandle &private_nh)
@@ -10,6 +11,12 @@ HibachiHardware::HibachiHardware(ros::NodeHandle &private_nh)
                  "rear_left_wheel",
                  "rear_right_wheel"};
   num_joints = 4;
+
+  front_right_pub = private_nh.advertise<geometry_msgs::Twist>("front_right_cmd", 10);
+  front_left_pub = private_nh.advertise<geometry_msgs::Twist>("front_left_cmd", 10);
+  rear_right_pub = private_nh.advertise<geometry_msgs::Twist>("rear_right_cmd", 10);
+  rear_left_pub = private_nh.advertise<geometry_msgs::Twist>("rear_left_cmd", 10);
+  
 
   openSerial();
 }
@@ -30,6 +37,15 @@ void HibachiHardware::init(void) {
 
   // Reset odometry
   reset();
+
+  // PID gains configurable
+  double _kP, _kI, _kD;
+  _private_nh.param<double>("PID_kP_gain", _kP, 0.0);
+  _private_nh.param<double>("PID_kI_gain", _kI, 0.0);
+  _private_nh.param<double>("PID_kD_gain", _kD, 0.0);
+  if (_kP != 0.0 || _kI != 0.0 || _kD != 0.0) {
+    setupPIDGains(_kP, _kI, _kD);
+  } 
 }
 
 /**
@@ -96,7 +112,8 @@ void HibachiHardware::read(ros::Duration &elapsed_time) {
     }
 
     // Print some output
-    ROS_INFO("Recived pos: %f, %f, %f, %f", tmp[0], tmp[1], tmp[2], tmp[3]);
+    ROS_INFO_THROTTLE(0.5,
+      "Recived pos: %f, %f, %f, %f", tmp[0], tmp[1], tmp[2], tmp[3]);
   } else {
     ROS_ERROR("No valid encoder position received");
   }
@@ -104,7 +121,8 @@ void HibachiHardware::read(ros::Duration &elapsed_time) {
   if (fourWheelEncoderSpeed != NULL) {
     fourWheelEncoderSpeed->getWheelsAngSpeed(tmp[0], tmp[1], tmp[2], tmp[3]);
     joint_velocity = tmp;
-    ROS_INFO("Received speed: %f, %f, %f, %f", tmp[0], tmp[1], tmp[2], tmp[3]);
+    ROS_INFO_THROTTLE(0.5,
+      "Received speed: %f, %f, %f, %f", tmp[0], tmp[1], tmp[2], tmp[3]);
   } else {
     ROS_ERROR("No valid encoder speed received");
   }
@@ -114,11 +132,25 @@ void HibachiHardware::read(ros::Duration &elapsed_time) {
  * Get latest velocity commands from ros_control via joint structure, and send to MCU
  */
 void HibachiHardware::write(ros::Duration &elapsed_time) {
-  ROS_INFO("I am sending %f, %f, %f and %f",
+  ROS_INFO_THROTTLE(0.5, "I am sending %f, %f, %f and %f",
            joint_velocity_command[0],
            joint_velocity_command[1],
            joint_velocity_command[2],
            joint_velocity_command[3]);
+  
+  geometry_msgs::Twist front_right_msg, front_left_msg,
+    rear_right_msg, rear_left_msg;
+
+  front_left_msg.linear.x = joint_velocity_command[0]; // front_left_wheel
+  front_right_msg.linear.x = joint_velocity_command[1]; // front_right_wheel
+  rear_left_msg.linear.x = joint_velocity_command[2]; // rear_left_wheel
+  rear_right_msg.linear.x = joint_velocity_command[3]; // rear_right_wheel
+
+  front_left_pub.publish(front_left_msg);
+  front_right_pub.publish(front_right_msg);
+  rear_left_pub.publish(rear_left_msg);
+  rear_right_pub.publish(rear_right_msg);
+
   hibachi_base::SetSkidSteerMotorSpeed SetSkidSteerMotorSpeed(
       joint_velocity_command[0],
       joint_velocity_command[1],
@@ -146,5 +178,15 @@ void HibachiHardware::reset() {
     joint_last_position[i] = 0.0;
     joint_velocity[i] = 0.0;
   }
+}
+
+ bool HibachiHardware::setupPIDGains(const double &kP, const double &kI, const double &kD) {
+  ROS_INFO("Setting up PID gains: P = %f, I = %f, D = %f", kP, kI, kD);
+
+  uint8_t selector = 0; // Set same gains for all wheel
+  hibachi_base::SetPIDGains PIDGains(selector, kP, kI, kD);
+  
+  serial_port.sendMessage(&PIDGains);
+  return true;
 }
 }  // namespace hibachi_base

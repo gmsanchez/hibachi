@@ -121,6 +121,21 @@ public:
   ResetOdometry();
 };  // class
 
+class SetPIDGains : public Message{
+public:
+  enum { MESSAGE_TYPE = 0x0010 };
+  enum {
+    WHEEL_SELECTOR = 0,
+    PID_KP_GAIN = 1,
+    PID_KI_GAIN = 3,
+    PID_KD_GAIN = 5,
+    PAYLOAD_LEN = 7,
+  };
+
+public:
+  SetPIDGains(uint8_t wheel, double kP, double kI, double kD);
+};
+
 // class EchoMessage : public Message {
 // public:
 //   enum { MESSAGE_TYPE = 0x00AA };

@@ -157,3 +157,11 @@ bool hibachi_base::FourWheelEncoderSpeed::getWheelsAngSpeed(double &front_left,
 }
 
 hibachi_base::ResetOdometry::ResetOdometry() : Message(MESSAGE_TYPE, PAYLOAD_LEN) {}
+
+hibachi_base::SetPIDGains::SetPIDGains(uint8_t wheel, double kP, double kI, double kD)
+    : Message(MESSAGE_TYPE, PAYLOAD_LEN) {
+        setU8(WHEEL_SELECTOR, wheel);
+        setU16(PID_KP_GAIN, (int16_t) (kP * 1000));
+        setU16(PID_KI_GAIN, (int16_t) (kI * 1000));
+        setU16(PID_KD_GAIN, (int16_t) (kD * 1000));
+}
