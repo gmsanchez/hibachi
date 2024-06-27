@@ -1,9 +1,0 @@
-<?xml version="1.0"?>
-<launch>
-
-    <!-- Hardware interface, diff_drive_controller, LSM9DS1 and MTi-630 -->
-    <include file="$(find hibachi_bringup)/launch/bringup-indoor.launch" />
-
-    <include file="$(find hibachi_indoor_localization)/launch/ekf_local.launch" />
-
-</launch>

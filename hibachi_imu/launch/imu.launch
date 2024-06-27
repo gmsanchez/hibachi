@@ -1,6 +1,0 @@
-<?xml version="1.0"?>
-<launch>
-    <node name="hibachi_imu_node" pkg="hibachi_imu" type="hibachi_imu_node" respawn="true" output="log">
-        <param name="sensor_frequency" value="50.0" />
-    </node>
-</launch>
