@@ -31,7 +31,7 @@
 
 	<gazebo>
 		<plugin filename="gz_ros2_control-system" name="gz_ros2_control::GazeboSimROS2ControlPlugin">
-			<parameters>$(find hibachi_hardware)/config/diff_drive_controller.yaml</parameters>
+			<parameters>$(find hibachi_control)/config/diff_drive_controller.yaml</parameters>
 		</plugin>
 	</gazebo>
 
