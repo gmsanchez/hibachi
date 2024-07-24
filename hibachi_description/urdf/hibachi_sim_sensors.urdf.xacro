@@ -4,7 +4,7 @@
 <gazebo reference="xsens_imu_link">
     <sensor name="xsens_imu" type="imu">
         <always_on>1</always_on>
-        <update_rate>100</update_rate>
+        <update_rate>20</update_rate>
         <visualize>true</visualize>
         <topic>mti_630_8A1G6/imu/data</topic>
         <gz_frame_id>xsens_imu_link</gz_frame_id>
@@ -13,7 +13,7 @@
 
     <sensor name="xsens_mag" type="magnetometer">
         <always_on>1</always_on>
-        <update_rate>50</update_rate>
+        <update_rate>20</update_rate>
         <visualize>true</visualize>
         <topic>mti_630_8A1G6/imu/mag</topic>
         <gz_frame_id>xsens_imu_link</gz_frame_id>
