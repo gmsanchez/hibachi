@@ -1,0 +1,14 @@
+launch:
+  - include:
+      file: "$(find-pkg-share hibachi_control)/launch/hibachi_control.launch.py"
+
+  - include:
+      file: "$(find-pkg-share hibachi_teleop)/launch/hibachi_twist_mux.launch.py"
+
+  - include:
+      file: "$(find-pkg-share hibachi_teleop)/launch/hibachi_teleop_twist_joy.launch.py"
+
+  - include:
+      file: "$(find-pkg-share hibachi_teleop)/launch/hibachi_twist_stamper.launch.py"
+
+

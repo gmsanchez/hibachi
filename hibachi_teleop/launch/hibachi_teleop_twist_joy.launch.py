@@ -10,19 +10,16 @@ def generate_launch_description():
     joy_vel = LaunchConfiguration('joy_vel')
     joy_config = LaunchConfiguration('joy_config')
     joy_dev = LaunchConfiguration('joy_dev')
-    config_filepath = LaunchConfiguration('config_filepath')
     
-
     ARGUMENTS = [
         DeclareLaunchArgument('use_sim_time', default_value='false',
             description='Use simulation (Gazebo) clock if true'),
         DeclareLaunchArgument('joy_vel', default_value='cmd_vel_joy'),
         DeclareLaunchArgument('joy_config', default_value='logitech_f710.config.yaml'),
         DeclareLaunchArgument('joy_dev', default_value='/dev/input/js0'),
-        DeclareLaunchArgument('config_filepath', default_value=[
-            PathJoinSubstitution([FindPackageShare('hibachi_teleop'), 'config', joy_config])
-        ]),
     ]
+
+    config_filepath = PathJoinSubstitution([FindPackageShare('hibachi_teleop'), 'config', joy_config])
 
     spawn_joy_node = Node(
         package='joy',
@@ -34,7 +31,6 @@ def generate_launch_description():
             'deadzone': 0.3,
             'autorepeat_rate': 20.0,
         }])
-
     
     teleop_twist_joy_node = Node(
         package='teleop_twist_joy',
