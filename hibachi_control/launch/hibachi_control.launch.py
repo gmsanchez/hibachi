@@ -11,8 +11,13 @@ from launch_ros.descriptions import ParameterValue
 def generate_launch_description():
 
     use_sim_time = LaunchConfiguration('use_sim_time', default='false')
+
+    ARGUMENTS = [
+        DeclareLaunchArgument('use_sim_time', default_value='false',
+            description='Use simulation (Gazebo) clock if true'),
+    ]
     
-    hibachi_hardware = IncludeLaunchDescription(
+    hibachi_description = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([
             PathJoinSubstitution([
                 FindPackageShare("hibachi_description"),
@@ -24,12 +29,7 @@ def generate_launch_description():
             'use_sim_time': use_sim_time
         }.items()
     )
-    
-    ARGUMENTS = [
-        DeclareLaunchArgument('use_sim_time', default_value='false',
-            description='Use simulation (Gazebo) clock if true'),
-    ]
-    
+        
     config_hibachi_velocity_controller = PathJoinSubstitution(
         [FindPackageShare("hibachi_control"),
         "config",
@@ -40,7 +40,7 @@ def generate_launch_description():
     node_controller_manager = Node(
         package="controller_manager",
         executable="ros2_control_node",
-        parameters=[config_hibachi_velocity_controller],
+        parameters=[{'is_sim': use_sim_time}, config_hibachi_velocity_controller],
         # arguments=['--ros-args', '--log-level', 'info']
     )
     
@@ -80,7 +80,7 @@ def generate_launch_description():
     )
 
     ld = LaunchDescription(ARGUMENTS)
-    ld.add_action(hibachi_hardware)
+    ld.add_action(hibachi_description)
     ld.add_action(node_controller_manager)
     ld.add_action(spawn_joint_state_broadcaster)
     ld.add_action(delay_robot_controller_spawner_after_joint_state_broadcaster_spawner)
