@@ -29,7 +29,7 @@ def generate_launch_description():
    nav2_params_file = LaunchConfiguration('nav2_params_file')
    amcl_params_file = LaunchConfiguration('amcl_params_file')
    amcl_map_file = LaunchConfiguration('amcl_map_file')
-    
+
    # Cargar:
    # - hibachi_description (XACRO > robot_state_publisher)
    # - hibachi_control = joint_state_broadcaster + hibachi_base_controller
@@ -71,6 +71,17 @@ def generate_launch_description():
             [FindPackageShare("hibachi_teleop"),
              "launch",
              "hibachi_twist_stamper.launch.py"],
+         )
+      ),
+      launch_arguments= {'use_sim_time': use_sim_time}.items(),
+   )
+
+   twist_stamper_cpp_launch = IncludeLaunchDescription(
+      PythonLaunchDescriptionSource(
+         PathJoinSubstitution(
+            [FindPackageShare("twist_stamper_cpp"),
+             "launch",
+             "twist_stamper_cpp_launch.py"],
          )
       ),
       launch_arguments= {'use_sim_time': use_sim_time}.items(),
@@ -150,12 +161,13 @@ def generate_launch_description():
    ld.add_action(hibachi_control_launch)
    ld.add_action(teleop_joy_launch)
    ld.add_action(teleop_twist_mux_launch)
-   ld.add_action(teleop_twist_stamper_launch)
+   # ld.add_action(teleop_twist_stamper_launch)
+   ld.add_action(twist_stamper_cpp_launch)
    ld.add_action(xsens_mti630_launch)
    ld.add_action(ekf_launch)
    ld.add_action(rplidar_a1_launch)
    ld.add_action(online_async_launch)
    # ld.add_action(nav2_amcl_localization_launch)
    ld.add_action(nav2_launch)
-   
+
    return ld
