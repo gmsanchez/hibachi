@@ -13,6 +13,7 @@ from launch import LaunchDescription
 def generate_launch_description():
 
    use_sim_time = LaunchConfiguration('use_sim_time', default='true')
+   nav2_params_file = PathJoinSubstitution([FindPackageShare('hibachi_navigation'), 'config', 'nav2_no_map_params.yaml'])
 
    gazebo_gps_world_launch = IncludeLaunchDescription(
       PythonLaunchDescriptionSource(
@@ -47,12 +48,12 @@ def generate_launch_description():
       launch_arguments= {'use_sim_time': use_sim_time}.items(),
    )
    
-   teleop_twist_stamper_launch = IncludeLaunchDescription(
+   twist_stamper_launch = IncludeLaunchDescription(
       PythonLaunchDescriptionSource(
          PathJoinSubstitution(
-            [FindPackageShare("hibachi_teleop"),
+            [FindPackageShare("twist_stamper_cpp"),
              "launch",
-             "hibachi_twist_stamper.launch.py"],
+             "twist_stamper_cpp_remapped_launch.py"],
          )
       ),
       launch_arguments= {'use_sim_time': use_sim_time}.items(),
@@ -79,20 +80,16 @@ def generate_launch_description():
 #       ),
 #       launch_arguments= {'use_sim_time': use_sim_time}.items(),
 #    )
-
-
+  
    nav2_launch = IncludeLaunchDescription(
       PythonLaunchDescriptionSource(
-         PathJoinSubstitution(
-            [FindPackageShare("hibachi_navigation"),
-             "launch",
-             "nav2.launch.py"],
-         )
+         PathJoinSubstitution([FindPackageShare('nav2_bringup'),
+            'launch',
+            'navigation_launch.py']),
       ),
-      launch_arguments= {'use_sim_time': use_sim_time,
-                         'params': PathJoinSubstitution(
-                [FindPackageShare("hibachi_navigation"), "config", "nav2_no_map_params.yaml"])}.items(),
-   )
+      launch_arguments = {'use_sim_time': use_sim_time,
+                           'params_file': nav2_params_file}.items()
+    )
 
    rviz_nav2_launch = IncludeLaunchDescription(
       PythonLaunchDescriptionSource(
@@ -112,7 +109,7 @@ def generate_launch_description():
       dual_ekf_navsat_launch,
       # teleop_joy_launch,
       teleop_twist_mux_launch,
-      teleop_twist_stamper_launch,
+      twist_stamper_launch,
       nav2_launch,
-      rviz_nav2_launch,
+      # rviz_nav2_launch,
    ])
