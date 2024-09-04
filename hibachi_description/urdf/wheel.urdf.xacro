@@ -43,7 +43,18 @@
         </link>
 
         <gazebo reference="${link_name}">
-            <material>Gazebo/DarkGrey</material>
+            <visual>
+                <!-- Gazebo does not support Ogre material scripts
+                https://gazebosim.org/api/sim/8/migrationsdf.html#:~:text=Materials
+                https://github.com/gazebosim/gazebo-classic/blob/gazebo11/media/materials/scripts/gazebo.material
+                -->
+                <material>
+                    <ambient>0.175 0.175 0.175 1.0</ambient>
+                    <diffuse>0.175 0.175 0.175 1.0</diffuse>
+                    <specular>0.175 0.175 0.175 1.0</specular>
+                </material>
+            </visual>
+            
             <!-- <selfCollide>false</selfCollide>
             <mu1 value="1.0"/>
             <mu2 value="0.5"/>

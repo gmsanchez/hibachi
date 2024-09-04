@@ -6,7 +6,7 @@
         <always_on>1</always_on>
         <update_rate>20</update_rate>
         <visualize>true</visualize>
-        <topic>mti_630_8A1G6/imu/data</topic>
+        <topic>mti_630_8A1G6/imu/data_raw</topic>
         <gz_frame_id>xsens_imu_link</gz_frame_id>
         <!-- <enable_metrics>true</enable_metrics> -->
     </sensor>
@@ -52,22 +52,6 @@
     </sensor>
 </gazebo>
 
-<!-- <gazebo>
-<plugin name="p3d_base_controller" filename="libgazebo_ros_p3d.so">
-    <alwaysOn>true</alwaysOn>
-    <updateRate>50.0</updateRate>
-    <robotNamespace>/</robotNamespace>
-    <bodyName>base_link</bodyName>
-    <body_name>base_link</body_name>
-    <frameId>base_link</frameId>
-    <topicName>ground_truth/state</topicName>
-    <gaussianNoise>0</gaussianNoise>
-    <frameName>world</frameName>
-    <xyzOffsets>0 0 0</xyzOffsets>
-    <rpyOffsets>0 0 0</rpyOffsets>
-</plugin>
-</gazebo> -->
-
 <gazebo reference="ardusimple_gps_link">
     <sensor name="ardusimple_navsat" type="navsat">
         <always_on>1</always_on>
@@ -76,8 +60,5 @@
         <gz_frame_id>ardusimple_gps_link</gz_frame_id>
     </sensor>
 </gazebo>
-
-
-
 
 </robot>
