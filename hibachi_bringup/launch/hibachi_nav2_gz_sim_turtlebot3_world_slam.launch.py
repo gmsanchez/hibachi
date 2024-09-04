@@ -3,7 +3,7 @@
 # from ament_index_python.packages import get_package_share_directory
 # from launch.launch_description_sources import PythonLaunchDescriptionSource
 
-from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription, SetEnvironmentVariable
+from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription
 from launch.substitutions import LaunchConfiguration, PathJoinSubstitution
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch_ros.substitutions import FindPackageShare
@@ -13,18 +13,19 @@ from launch import LaunchDescription
 def generate_launch_description():
 
    use_sim_time = LaunchConfiguration('use_sim_time', default='true')
-   nav2_params_file = PathJoinSubstitution([FindPackageShare('hibachi_navigation'), 'config', 'nav2_no_map_params.yaml'])
-
-   gazebo_gps_world_launch = IncludeLaunchDescription(
+   slam_params_file = PathJoinSubstitution([FindPackageShare('hibachi_navigation'), 'config', 'mapper_params_online_async.yaml'])
+   nav2_params_file = PathJoinSubstitution([FindPackageShare('hibachi_navigation'), 'config', 'nav2_params.yaml'])
+   
+   gazebo_turtlebot_world_launch = IncludeLaunchDescription(
       PythonLaunchDescriptionSource(
          PathJoinSubstitution(
             [FindPackageShare("hibachi_gz"),
              "launch",
-             "hibachi_gz_gps_world.launch.py"],
+             "hibachi_gz_turtlebot3_world.launch.py"],
          )
       ),
    )
-
+   
    imu_filter_madgwick_enu = IncludeLaunchDescription(
       PythonLaunchDescriptionSource(
          PathJoinSubstitution(
@@ -33,20 +34,21 @@ def generate_launch_description():
              "imu_filter_madgwick.launch.py"],
          )
       ),
-      launch_arguments= {'use_sim_time': use_sim_time}.items(),
+      launch_arguments= {'use_sim_time': use_sim_time,
+                         'use_mag': False}.items(),
    )
 
-   dual_ekf_navsat_launch = IncludeLaunchDescription(
+   ekf_launch = IncludeLaunchDescription(
       PythonLaunchDescriptionSource(
          PathJoinSubstitution(
             [FindPackageShare("hibachi_localization"),
              "launch",
-             "dual_ekf_navsat.launch.py"],
+             "ekf.launch.py"],
          )
       ),
       launch_arguments= {'use_sim_time': use_sim_time}.items(),
    )
-
+   
    teleop_joy_launch = IncludeLaunchDescription(
       PythonLaunchDescriptionSource(
          PathJoinSubstitution(
@@ -58,12 +60,12 @@ def generate_launch_description():
       launch_arguments= {'use_sim_time': use_sim_time}.items(),
    )
    
-   twist_stamper_launch = IncludeLaunchDescription(
+   teleop_twist_stamper_launch = IncludeLaunchDescription(
       PythonLaunchDescriptionSource(
          PathJoinSubstitution(
-            [FindPackageShare("twist_stamper_cpp"),
+            [FindPackageShare("hibachi_teleop"),
              "launch",
-             "twist_stamper_cpp_remapped_launch.py"],
+             "hibachi_twist_stamper.launch.py"],
          )
       ),
       launch_arguments= {'use_sim_time': use_sim_time}.items(),
@@ -80,20 +82,32 @@ def generate_launch_description():
       launch_arguments= {'use_sim_time': use_sim_time}.items(),
    )
 
-#    nav2_localization_launch = IncludeLaunchDescription(
-#       PythonLaunchDescriptionSource(
-#          PathJoinSubstitution(
-#             [FindPackageShare("hibachi_navigation"),
-#              "launch",
-#              "localization.launch.py"],
-#          )
-#       ),
-#       launch_arguments= {'use_sim_time': use_sim_time}.items(),
-#    )
-  
+   nav2_localization_launch = IncludeLaunchDescription(
+      PythonLaunchDescriptionSource(
+         PathJoinSubstitution(
+            [FindPackageShare("hibachi_navigation"),
+             "launch",
+             "amcl_localization.launch.py"],
+         )
+      ),
+      launch_arguments= {'use_sim_time': use_sim_time}.items(),
+   )
+   
+   online_async_launch = IncludeLaunchDescription(
+      PythonLaunchDescriptionSource(
+         PathJoinSubstitution(
+            [FindPackageShare("slam_toolbox"),
+               "launch",
+               "online_async_launch.py"],
+         )
+      ),
+      launch_arguments= {'use_sim_time': use_sim_time,
+                         'slam_params_file': slam_params_file}.items(),
+   )
+
    nav2_launch = IncludeLaunchDescription(
       PythonLaunchDescriptionSource(
-         PathJoinSubstitution([FindPackageShare('hibachi_navigation'),
+         PathJoinSubstitution([FindPackageShare('nav2_bringup'),
             'launch',
             'navigation_launch.py']),
       ),
@@ -115,13 +129,12 @@ def generate_launch_description():
    )
    
    return LaunchDescription([
-      SetEnvironmentVariable('GZ_SIM_SYSTEM_PLUGIN_PATH', '/home/ws/hibachi_ros2_ws/build/custom_magnetometer'),
-      gazebo_gps_world_launch,
-      imu_filter_madgwick_enu,
-      dual_ekf_navsat_launch,
+      gazebo_turtlebot_world_launch,
+      ekf_launch,
       # teleop_joy_launch,
       teleop_twist_mux_launch,
-      twist_stamper_launch,
+      teleop_twist_stamper_launch,
+      online_async_launch,
       nav2_launch,
-      # rviz_nav2_launch,
+      rviz_nav2_launch,
    ])
