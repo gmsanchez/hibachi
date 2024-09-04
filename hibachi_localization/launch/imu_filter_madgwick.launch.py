@@ -44,7 +44,7 @@ def generate_launch_description():
                     {'use_sim_time': use_sim_time},
                     # imu_filter_madgwick_config
                     ],
-        remappings=[('imu/data_raw','/mti_630_8A1G6/imu/data_raw'),
+        remappings=[('imu/data_raw','/mti_630_8A1G6/imu/data'),
                     ('imu/mag', '/mti_630_8A1G6/imu/mag'),
                     # ('/imu/data', '/imu_filter_madgwick/imu/data')
                     ]

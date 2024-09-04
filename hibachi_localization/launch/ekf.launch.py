@@ -17,7 +17,7 @@ def generate_launch_description():
             parameters = [{'use_sim_time': use_sim_time},
                           PathJoinSubstitution([FindPackageShare('hibachi_localization'), 'config', 'ekf.yaml'])],
             remappings=[("odometry/filtered", "odometry/filtered"),
-                            ("imu/data", "/imu_filter_madgwick/imu/data")],
+                            ("imu/data", "/mti_630_8A1G6/imu/data")],
            )
 
     return LaunchDescription([
