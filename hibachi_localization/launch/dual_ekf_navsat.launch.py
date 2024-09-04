@@ -23,7 +23,8 @@ def generate_launch_description():
                 output="screen",
                 parameters=[{"use_sim_time": use_sim_time},
                             PathJoinSubstitution([FindPackageShare('hibachi_localization'), 'config', 'dual_ekf_navsat_params.yaml'])],
-                remappings=[("odometry/filtered", "odometry/local")],
+                remappings=[("odometry/filtered", "odometry/local"),
+                            ("imu/data", "/imu_filter_madgwick/imu/data")],
             ),
 
             Node(
@@ -33,7 +34,8 @@ def generate_launch_description():
                 output="screen",
                 parameters=[{"use_sim_time": use_sim_time},
                             PathJoinSubstitution([FindPackageShare('hibachi_localization'), 'config', 'dual_ekf_navsat_params.yaml'])],
-                remappings=[("odometry/filtered", "odometry/global")],
+                remappings=[("odometry/filtered", "odometry/global"),
+                            ("imu/data", "/imu_filter_madgwick/imu/data")],
             ),
 
             Node(
@@ -44,7 +46,7 @@ def generate_launch_description():
                 parameters=[{"use_sim_time": use_sim_time},
                             PathJoinSubstitution([FindPackageShare('hibachi_localization'), 'config', 'dual_ekf_navsat_params.yaml'])],
                 remappings=[
-                    ("imu", "/mti_630_8A1G6/imu/data"),
+                    ("imu", "/imu_filter_madgwick/imu/data"),
                     ("gps/fix", "ardusimple/fix"),
                     ("gps/filtered", "gps/filtered"),
                     ("odometry/gps", "odometry/gps"),
