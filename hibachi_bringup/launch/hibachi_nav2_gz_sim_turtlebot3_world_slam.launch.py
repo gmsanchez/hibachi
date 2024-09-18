@@ -85,7 +85,7 @@ def generate_launch_description():
    nav2_localization_launch = IncludeLaunchDescription(
       PythonLaunchDescriptionSource(
          PathJoinSubstitution(
-            [FindPackageShare("hibachi_navigation"),
+            [FindPackageShare("nav2_bringup"),
              "launch",
              "amcl_localization.launch.py"],
          )
@@ -107,7 +107,7 @@ def generate_launch_description():
 
    nav2_launch = IncludeLaunchDescription(
       PythonLaunchDescriptionSource(
-         PathJoinSubstitution([FindPackageShare('nav2_bringup'),
+         PathJoinSubstitution([FindPackageShare('hibachi_navigation'),
             'launch',
             'navigation_launch.py']),
       ),
