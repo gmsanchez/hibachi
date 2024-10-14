@@ -148,7 +148,7 @@ def generate_launch_description():
 
    nav2_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
-            PathJoinSubstitution([FindPackageShare('nav2_bringup'),
+            PathJoinSubstitution([FindPackageShare('hibachi_navigation'),
                'launch',
                'navigation_launch.py']),
         ),
