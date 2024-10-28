@@ -36,7 +36,7 @@ def generate_launch_description():
         package='teleop_twist_joy',
         executable='teleop_node',
         name='teleop_twist_joy_node',
-        parameters=[config_filepath, {'use_sim_time': use_sim_time}],
+        parameters=[config_filepath, {'use_sim_time': use_sim_time, 'publish_stamped_twist': False}],
         remappings={('/cmd_vel', joy_vel)},
     )
     

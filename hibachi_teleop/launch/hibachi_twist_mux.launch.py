@@ -15,7 +15,7 @@ def generate_launch_description():
     twist_mux = Node(
             package="twist_mux",
             executable="twist_mux",
-            parameters=[twist_mux_params, {'use_sim_time': use_sim_time}],
+            parameters=[twist_mux_params, {'use_sim_time': use_sim_time, 'use_stamped': False}],
             # Default publisher for twist_mux is /cmd_vel_out
             # Rename so it matches diff_drive_controller topic
             remappings=[('/cmd_vel_out','/hibachi_base_controller/cmd_vel_unstamped')]
