@@ -7,7 +7,7 @@ from launch import LaunchDescription
 
 def generate_launch_description():
 
-    use_sim_time = LaunchConfiguration('use_sim_time', default='false')
+    use_sim_time = LaunchConfiguration('use_sim_time', default='False')
 
     ARGUMENTS = [
         DeclareLaunchArgument('nav2_params_file', default_value=PathJoinSubstitution([FindPackageShare('hibachi_navigation'), 'config', 'nav2_no_map_params.yaml']),
