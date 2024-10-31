@@ -52,7 +52,7 @@ def generate_launch_description():
             PathJoinSubstitution(
             [FindPackageShare("twist_stamper_cpp"),
                 "launch",
-                "twist_stamper_cpp_launch.py"],
+                "twist_stamper_cpp_remapped_launch.py"],
             )
         ),
         launch_arguments= {'use_sim_time': use_sim_time}.items(),
