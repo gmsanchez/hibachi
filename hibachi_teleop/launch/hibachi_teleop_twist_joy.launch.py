@@ -30,6 +30,12 @@ def generate_launch_description():
             'dev': joy_dev,
             'deadzone': 0.3,
             'autorepeat_rate': 20.0,
+            # This option is added because of
+            # https://github.com/ros2/teleop_twist_joy/issues/37
+            # https://github.com/ros-drivers/joystick_drivers/issues/263
+            # https://github.com/ros-drivers/joystick_drivers/pull/266
+            'init': True,
+
         }])
     
     teleop_twist_joy_node = Node(
