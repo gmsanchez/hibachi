@@ -9,6 +9,4 @@ launch:
       file: "$(find-pkg-share hibachi_teleop)/launch/hibachi_teleop_twist_joy.launch.py"
 
   - include:
-      file: "$(find-pkg-share hibachi_teleop)/launch/hibachi_twist_stamper.launch.py"
-
-
+      file: "$(find-pkg-share twist_stamper_cpp)/launch/twist_stamper_cpp_remapped_launch.py"
