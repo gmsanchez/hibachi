@@ -81,7 +81,7 @@ def generate_launch_description():
          PathJoinSubstitution(
             [FindPackageShare("twist_stamper_cpp"),
              "launch",
-             "twist_stamper_cpp_launch.py"],
+             "twist_stamper_cpp_remapped_launch.py"],
          )
       ),
       launch_arguments= {'use_sim_time': use_sim_time}.items(),
@@ -159,13 +159,13 @@ def generate_launch_description():
 
    ld = LaunchDescription(ARGUMENTS)
    ld.add_action(hibachi_control_launch)
-   ld.add_action(teleop_joy_launch)
    ld.add_action(teleop_twist_mux_launch)
+   ld.add_action(teleop_joy_launch)
    # ld.add_action(teleop_twist_stamper_launch)
    ld.add_action(twist_stamper_cpp_launch)
    ld.add_action(xsens_mti630_launch)
-   ld.add_action(ekf_launch)
    ld.add_action(rplidar_a1_launch)
+   ld.add_action(ekf_launch)
    ld.add_action(online_async_launch)
    # ld.add_action(nav2_amcl_localization_launch)
    ld.add_action(nav2_launch)
