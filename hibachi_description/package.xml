@@ -1,29 +1,24 @@
 <?xml version="1.0"?>
-<?xml-model href="http://download.ros.org/schema/package_format3.xsd"
-   schematypens="http://www.w3.org/2001/XMLSchema"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
-    <name>hibachi_description</name>
-    <version>0.1.0</version>
-    <description>The Hibachi URDF description</description>
+  <name>hibachi_description</name>
+  <version>1.0.0</version>
+  <description>The Hibachi URDF description for ROS2 Humble</description>
+  <maintainer email="gsanchez@sinc.unl.edu.ar">Guido Sanchez</maintainer>
+  <maintainer email="acapovilla@sinc.unl.edu.ar">Agustin Capovilla</maintainer>
 
-    <maintainer email="gsanchez@sinc.unl.edu.ar">Guido Sanchez</maintainer>
-    <maintainer email="acapovilla@sinc.unl.edu.ar">Agustin Capovilla</maintainer>
-    <license>TODO: License declaration</license>
+  <license>BSD</license>
 
-    <url type="bugtracker">https://github.com/gmsanchez/hibachi/issues</url>
-    <url type="repository">https://github.com/gmsanchez/hibachi</url>
+  <buildtool_depend>ament_cmake</buildtool_depend>
 
-    <author email="gsanchez@sinc.unl.edu.ar">Guido Sanchez</author>
-    <author email="acapovilla@sinc.unl.edu.ar">Agustin Capovilla</author>
-    <author email="mmurillo@sinc.unl.edu.ar">Marina Murillo</author>
-    <author email="ngaggion@gmail.com">Nicolas Gaggion</author>
-    <author email="estebanwarinet@gmail.com">Esteban Warinet</author>
+  <depend>xacro</depend>
+  <depend>urdf</depend>
+  <depend>robot_state_publisher</depend>
 
-    <buildtool_depend>catkin</buildtool_depend>
+  <test_depend>ament_lint_auto</test_depend>
+  <test_depend>ament_lint_common</test_depend>
 
-    <build_depend>roslaunch</build_depend>
-    <exec_depend>urdf</exec_depend>
-    <exec_depend>xacro</exec_depend>
-
-    <export></export>
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
 </package>

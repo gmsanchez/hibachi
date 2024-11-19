@@ -1,4 +1,0 @@
-[submodule "hibachi_imu/include/insens-lib"]
-	path = hibachi_imu/include/insens-lib
-	url = https://gitlab.com/acapovilla/insens-lib.git
-	branch = dev

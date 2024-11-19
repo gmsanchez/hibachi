@@ -1,8 +1,0 @@
-world_frame: enu
-fixed_frame: base_link
-orientation_stddev: 0.0
-gain: 0.1  # Defaults to 0.1
-zeta: 0.00048
-publish_tf: false
-use_mag: true
-publish_debug_topics: false
