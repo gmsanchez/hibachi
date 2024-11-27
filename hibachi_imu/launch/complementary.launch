@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<launch>
+
+  <include file="$(find hibachi_imu)/launch/imu.launch" />
+ 
+  <node name="imu_complementary_filter" pkg="imu_complementary_filter" type="complementary_filter_node" >
+    <param name="use_mag" value="false" />
+    <remap from="/imu/data_raw" to="/hibachi_imu_node/data_raw" />
+    <remap from="/imu/data" to="/hibachi_imu_node/madgwick" />
+  </node>
+  
+</launch>

@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<launch>
+    <arg name="port" default="/dev/ttyARDS" />
+    <arg name="frame_id" default="ardusimple_ant_link" />
+    <arg name="baud" default="115200" />
+
+    <node name="gps_ardusimple_rtk" pkg="nmea_navsat_driver" type="nmea_serial_driver" output="log">
+        <param name="port"     type="string" value="$(arg port)"/>
+        <param name="frame_id" type="string" value="$(arg frame_id)"/>
+        <param name="baud"     type="int"    value="$(arg baud)"/>
+        
+        <remap from="fix"               to="ardusimple/fix" />
+        <remap from="vel"               to="ardusimple/vel" />
+        <remap from="time_reference"    to="ardusimple/time_reference" />
+        <remap from="heading"           to="ardusimple/heading" />
+    </node>
+ </launch>

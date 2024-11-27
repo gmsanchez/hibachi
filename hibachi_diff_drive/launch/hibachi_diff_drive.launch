@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<launch>
+    <node name="hibachi_diff_drive" pkg="hibachi_diff_drive" type="hibachi_diff_drive_node" output="screen">
+        <param name="control_frequency" value="20.0" />
+        <param name="wheel_radius" value="0.06"/>
+        <param name="wheel_separation" value="0.34"/>
+        <param name="v_body_max" value="1.0"/> <!-- 4.0 -->
+        <param name="w_body_max" value="5.0"/> <!-- 0.72 -->
+        <param name="w_left_max" value="12"/> <!-- 12.0 -->
+        <param name="w_right_max" value="12"/> <!-- 12.0 -->
+        <param name="velocity_rolling_window_size" value="10"/> <!-- default is 10 -->
+    </node>
+</launch>

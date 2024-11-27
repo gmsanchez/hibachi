@@ -1,22 +1,32 @@
 <?xml version="1.0"?>
-<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd"
+   schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
-  <name>hibachi_bringup</name>
-  <version>1.0.0</version>
-  <description>Package that holds different configurations for the Hibachi bringup</description>
-  <maintainer email="sanchez.guido@gmail.com">Guido Sanchez</maintainer>
-  <maintainer email="acapovilla@sinc.unl.edu.ar">Agustin Capovilla</maintainer>
-  
-  <license>BSD</license>
+    <name>hibachi_bringup</name>
+    <version>0.1.0</version>
+    <description>The hibachi_bringup package</description>
 
-  <buildtool_depend>ament_cmake</buildtool_depend>
+    <maintainer email="gsanchez@sinc.unl.edu.ar">Guido Sanchez</maintainer>
+    <maintainer email="acapovilla@sinc.unl.edu.ar">Agustin Capovilla</maintainer>
+    <license>TODO: License declaration</license>
 
-  <!-- <depend>hibachi_hardware</depend> -->
+    <url type="bugtracker">https://github.com/gmsanchez/hibachi/issues</url>
+    <url type="repository">https://github.com/gmsanchez/hibachi</url>
 
-  <test_depend>ament_lint_auto</test_depend>
-  <test_depend>ament_lint_common</test_depend>
+    <author email="acapovilla@sinc.unl.edu.ar">Agustin Capovilla</author>
+    <author email="gsanchez@sinc.unl.edu.ar">Guido Sanchez</author>
+    <author email="mmurillo@sinc.unl.edu.ar">Marina Murillo</author>
 
-  <export>
-    <build_type>ament_cmake</build_type>
-  </export>
+    <buildtool_depend>catkin</buildtool_depend>
+    <build_depend>roslaunch</build_depend>
+
+    <exec_depend>hibachi_base</exec_depend>
+    <exec_depend>hibachi_control</exec_depend>
+    <exec_depend>hibachi_description</exec_depend>
+
+    <exec_depend>robot_localization</exec_depend>
+    <exec_depend>rplidar_ros</exec_depend>
+    <exec_depend>move_base</exec_depend>
+
+    <export></export>
 </package>
