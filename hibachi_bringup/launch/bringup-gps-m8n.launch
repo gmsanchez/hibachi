@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<launch>
+    <arg name="port" default="/dev/ttyAMA0" />
+    <arg name="frame_id" default="m8n_ant_link" />
+    <arg name="baud" default="9600" />
+
+    <node name="gps_m8n" pkg="nmea_navsat_driver" type="nmea_serial_driver" output="log">
+        <param name="port"     type="string" value="$(arg port)"/>
+        <param name="frame_id" type="string" value="$(arg frame_id)"/>
+        <param name="baud"     type="int"    value="$(arg baud)"/>
+        
+        <remap from="fix"               to="/m8n/fix" />
+        <remap from="vel"               to="/m8n/vel" />
+        <remap from="time_reference"    to="/m8n/time_reference" />
+        <remap from="heading"           to="/m8n/heading" />
+    </node>
+ </launch>

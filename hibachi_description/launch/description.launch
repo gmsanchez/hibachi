@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<launch>
+    <arg name="robot_namespace" default="/" />
+    <arg name="urdf_extras" default="$(optenv HIBACHI_URDF_EXTRAS)" />
+
+    <param name="robot_description" command="$(find xacro)/xacro '$(find hibachi_description)/xacro/hibachi.xacro'
+    robot_namespace:=$(arg robot_namespace)
+    urdf_extras:=$(arg urdf_extras)
+    " />
+</launch>

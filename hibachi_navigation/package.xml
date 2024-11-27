@@ -1,18 +1,28 @@
 <?xml version="1.0"?>
-<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd"
+   schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
-  <name>hibachi_navigation</name>
-  <version>0.0.0</version>
-  <description>TODO: Package description</description>
-  <maintainer email="vscode@todo.todo">vscode</maintainer>
-  <license>TODO: License declaration</license>
+    <name>hibachi_navigation</name>
+    <version>0.1.0</version>
+    <description>The hibachi_navigation package</description>
 
-  <buildtool_depend>ament_cmake</buildtool_depend>
+    <maintainer email="gsanchez@sinc.unl.edu.ar">Guido Sanchez</maintainer>
+    <maintainer email="acapovilla@sinc.unl.edu.ar">Agustin Capovilla</maintainer>
+    <license>TODO: License declaration</license>
 
-  <test_depend>ament_lint_auto</test_depend>
-  <test_depend>ament_lint_common</test_depend>
+    <url type="bugtracker">https://github.com/gmsanchez/hibachi/issues</url>
+    <url type="repository">https://github.com/gmsanchez/hibachi</url>
 
-  <export>
-    <build_type>ament_cmake</build_type>
-  </export>
+    <author email="acapovilla@sinc.unl.edu.ar">Agustin Capovilla</author>
+    <author email="gsanchez@sinc.unl.edu.ar">Guido Sanchez</author>
+    <author email="mmurillo@sinc.unl.edu.ar">Marina Murillo</author>
+
+    <buildtool_depend>catkin</buildtool_depend>
+    <build_depend>roslaunch</build_depend>
+
+    <exec_depend>move_base</exec_depend>
+    <exec_depend>gmapping</exec_depend>
+    <exec_depend>dwa_local_planner</exec_depend>
+
+    <export></export>
 </package>

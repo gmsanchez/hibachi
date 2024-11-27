@@ -1,9 +1,0 @@
-<library path="hibachi_base">
-  <class name="hibachi_base/HibachiHardware"
-         type="hibachi_base::HibachiHardware"
-         base_class_type="hardware_interface::SystemInterface">
-    <description>
-      The ros2_control HibachiHardware using a system hardware interface-type.
-    </description>
-  </class>
-</library>

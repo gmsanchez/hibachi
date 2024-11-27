@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<launch>
+    <node name="gps_emlid_rtk" pkg="nmea_navsat_driver" type="nmea_serial_driver" output="log">
+        <param name="port"         type="string" value="/dev/ttyUSB0"/>
+        <param name="frame_id"         type="string" value="emlid_ant_link"/>
+        <param name="baud"     type="int"    value="115200"/>
+        <remap from="fix" to="/emlid/fix" />
+        <remap from="vel" to="/emlid/vel" />
+        <remap from="time_reference" to="/emlid/time_reference" />
+        <remap from="heading" to="/emlid/heading" />
+    </node>
+ </launch>

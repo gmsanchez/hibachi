@@ -1,0 +1,11 @@
+<launch>
+
+<!-- Arguments -->
+<arg name="save_dir" default="$(find hibachi_bringup)/bag"/>
+<arg name="prefix" default="hibachi_log"/>
+
+<!-- Data logger -->
+<node pkg="rosbag" type="record" name="logger" output="screen"
+      args="-o $(arg save_dir)/$(arg prefix) -a"/>
+
+</launch>
