@@ -6,13 +6,13 @@ from launch_ros.actions import Node
 
 def generate_launch_description():
 
-    use_sim_time = LaunchConfiguration('use_sim_time', default='false')
+    use_sim_time = LaunchConfiguration('use_sim_time')
     joy_vel = LaunchConfiguration('joy_vel')
     joy_config = LaunchConfiguration('joy_config')
     joy_dev = LaunchConfiguration('joy_dev')
     
     ARGUMENTS = [
-        DeclareLaunchArgument('use_sim_time', default_value='false',
+        DeclareLaunchArgument('use_sim_time', default_value='False',
             description='Use simulation (Gazebo) clock if true'),
         DeclareLaunchArgument('joy_vel', default_value='cmd_vel_joy'),
         DeclareLaunchArgument('joy_config', default_value='logitech_f710.config.yaml'),

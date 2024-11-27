@@ -102,6 +102,17 @@ def generate_launch_description():
         launch_arguments= {'use_sim_time': use_sim_time}.items(),
     )
 
+    fake_lidar_launch = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(
+            PathJoinSubstitution(
+            [FindPackageShare("fake_lidar"),
+                "launch",
+                "fake_lidar_launch.py"],
+            )
+        ),
+        launch_arguments= {'use_sim_time': use_sim_time}.items(),
+    )
+
     dual_ekf_navsat_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
             PathJoinSubstitution(
@@ -131,8 +142,9 @@ def generate_launch_description():
     ld.add_action(twist_stamper_cpp_launch)
     ld.add_action(xsens_mti630_launch)
     ld.add_action(ardusimple_launch)
-    ld.add_action(m8n_launch)
-    ld.add_action(rplidar_a1_launch)
+    # ld.add_action(m8n_launch)
+    # ld.add_action(rplidar_a1_launch)
+    ld.add_action(fake_lidar_launch)
     ld.add_action(dual_ekf_navsat_launch)
     ld.add_action(nav2_launch)
 

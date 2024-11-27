@@ -13,7 +13,7 @@ def generate_launch_description():
     # imu_filter_madgwick_config = PathJoinSubstitution([FindPackageShare('hibachi_localization'), 'config', 'imu_filter_madgwick_with_mag.yaml'])
     
     ARGUMENTS = [
-        DeclareLaunchArgument('use_sim_time', default_value='false',
+        DeclareLaunchArgument('use_sim_time', default_value='False',
             description='Use simulation (Gazebo) clock if true'),
         DeclareLaunchArgument('use_mag', default_value='true',
             description='Madgwick filter: Whether to use the magnetic field data in the data fusion.'),

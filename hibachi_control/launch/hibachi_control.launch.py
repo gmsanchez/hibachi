@@ -10,10 +10,10 @@ from launch_ros.descriptions import ParameterValue
 
 def generate_launch_description():
 
-    use_sim_time = LaunchConfiguration('use_sim_time', default='false')
+    use_sim_time = LaunchConfiguration('use_sim_time')
 
     ARGUMENTS = [
-        DeclareLaunchArgument('use_sim_time', default_value='false',
+        DeclareLaunchArgument('use_sim_time', default_value='False',
             description='Use simulation (Gazebo) clock if true'),
     ]
     
@@ -41,7 +41,7 @@ def generate_launch_description():
         package="controller_manager",
         executable="ros2_control_node",
         parameters=[{'is_sim': use_sim_time}, config_hibachi_velocity_controller],
-        # arguments=['--ros-args', '--log-level', 'info']
+        arguments=['--ros-args', '--log-level', 'WARN']
     )
     
     # Sacado del launch de https://github.dev/husarion/rosbot_hardware_interfaces

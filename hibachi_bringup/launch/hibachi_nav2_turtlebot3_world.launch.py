@@ -12,7 +12,7 @@ from launch import LaunchDescription
 
 def generate_launch_description():
 
-   use_sim_time = LaunchConfiguration('use_sim_time', default='true')
+   use_sim_time = LaunchConfiguration('use_sim_time', default='True')
 
    gazebo_turtlebot_world_launch = IncludeLaunchDescription(
       PythonLaunchDescriptionSource(

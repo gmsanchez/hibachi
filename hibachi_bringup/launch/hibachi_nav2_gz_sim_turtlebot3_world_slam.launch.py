@@ -12,7 +12,7 @@ from launch import LaunchDescription
 
 def generate_launch_description():
 
-   use_sim_time = LaunchConfiguration('use_sim_time', default='true')
+   use_sim_time = LaunchConfiguration('use_sim_time', default='True')
    slam_params_file = PathJoinSubstitution([FindPackageShare('hibachi_navigation'), 'config', 'mapper_params_online_async.yaml'])
    nav2_params_file = PathJoinSubstitution([FindPackageShare('hibachi_navigation'), 'config', 'nav2_params.yaml'])
    

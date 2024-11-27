@@ -7,7 +7,7 @@ from launch_ros.descriptions import ParameterValue
 
 def generate_launch_description():
 
-    use_sim_time = LaunchConfiguration('use_sim_time', default='false')
+    use_sim_time = LaunchConfiguration('use_sim_time')
 
     urdf_path = PathJoinSubstitution(
         [FindPackageShare("hibachi_description"), 'urdf', 'hibachi.urdf.xacro']
@@ -29,7 +29,7 @@ def generate_launch_description():
     return LaunchDescription([
         DeclareLaunchArgument(
             'use_sim_time',
-            default_value='false',
+            default_value='False',
             description='Use simulation (Gazebo) clock if true'),
         node_robot_state_publisher,
     ])
