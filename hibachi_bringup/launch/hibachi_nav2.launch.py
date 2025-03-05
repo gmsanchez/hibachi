@@ -109,12 +109,12 @@ def generate_launch_description():
       launch_arguments= {'use_sim_time': use_sim_time}.items(),
    )
 
-   rplidar_a1_launch = IncludeLaunchDescription(
+   rplidar_s3_launch = IncludeLaunchDescription(
       PythonLaunchDescriptionSource(
          PathJoinSubstitution(
             [FindPackageShare("rplidar_a1_bringup"),
              "launch",
-             "rplidar.launch.py"],
+             "sllidar_s3_launch.py"],
          )
       ),
       launch_arguments= {'use_sim_time': use_sim_time}.items(),
@@ -164,7 +164,7 @@ def generate_launch_description():
    # ld.add_action(teleop_twist_stamper_launch)
    ld.add_action(twist_stamper_cpp_launch)
    ld.add_action(xsens_mti630_launch)
-   ld.add_action(rplidar_a1_launch)
+   ld.add_action(rplidar_s3_launch)
    ld.add_action(ekf_launch)
    ld.add_action(online_async_launch)
    # ld.add_action(nav2_amcl_localization_launch)
