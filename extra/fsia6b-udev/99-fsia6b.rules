@@ -1,0 +1,7 @@
+# Joystick FlySky sobre USB
+# https://who-t.blogspot.com/2012/07/elographics-touchscreen-setup.html
+
+SUBSYSTEM=="tty", ATTRS{idVendor}=="067b", ATTRS{idProduct}=="2303", SYMLINK+="ttyFLYSKY", \
+      RUN+="/usr/sbin/modprobe fsia6b", \
+      TAG+="systemd", ENV{SYSTEMD_WANTS}+="fsia6b-inputattach@%k.service"
+

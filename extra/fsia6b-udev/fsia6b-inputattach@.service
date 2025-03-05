@@ -1,0 +1,6 @@
+[Unit]
+Description=inputattach for fsia6b receiver
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/inputattach --fsia6b /dev/%I
