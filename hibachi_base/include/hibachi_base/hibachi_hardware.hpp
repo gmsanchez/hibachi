@@ -1,8 +1,9 @@
 #ifndef __HIBACHI_BASE__HIBACHI_HARDWARE_HPP__
 #define __HIBACHI_BASE__HIBACHI_HARDWARE_HPP__
 
+#include "hardware_interface/handle.hpp"
+#include "hardware_interface/hardware_info.hpp"
 #include "hardware_interface/system_interface.hpp"
-#include "hardware_interface/visibility_control.h"
 
 #include "rclcpp/rclcpp.hpp"
 #include "rclcpp/macros.hpp"
@@ -25,7 +26,6 @@ class HibachiHardware : public hardware_interface::SystemInterface
   public:
     RCLCPP_SHARED_PTR_DEFINITIONS(HibachiHardware)
 
-    HARDWARE_INTERFACE_PUBLIC
     CallbackReturn on_init(const hardware_interface::HardwareInfo& hardware_info) override;
 
     /* // HARDWARE_INTERFACE_PUBLIC
@@ -36,30 +36,21 @@ class HibachiHardware : public hardware_interface::SystemInterface
     // CallbackReturn on_cleanup(const rclcpp_lifecycle::State& previous_state)
     // override; */
 
-    HARDWARE_INTERFACE_PUBLIC
     CallbackReturn on_activate(const rclcpp_lifecycle::State& previous_state) override;
 
-    HARDWARE_INTERFACE_PUBLIC
     CallbackReturn on_deactivate(const rclcpp_lifecycle::State& previous_state) override;
 
-    /* // HARDWARE_INTERFACE_PUBLIC
-    // CallbackReturn on_shutdown(const rclcpp_lifecycle::State& previous_state)
-    // override;
+    // CallbackReturn on_shutdown(const rclcpp_lifecycle::State& previous_state) override;
 
-    // HARDWARE_INTERFACE_PUBLIC
-    // CallbackReturn on_error(const rclcpp_lifecycle::State& previous_state) override; */
+    // CallbackReturn on_error(const rclcpp_lifecycle::State& previous_state) override;
 
-    HARDWARE_INTERFACE_PUBLIC
     std::vector<StateInterface> export_state_interfaces() override;
 
-    HARDWARE_INTERFACE_PUBLIC
     std::vector<CommandInterface> export_command_interfaces() override;
 
-    HARDWARE_INTERFACE_PUBLIC
     hardware_interface::return_type read(const rclcpp::Time& time, const
     rclcpp::Duration& period) override;
 
-    HARDWARE_INTERFACE_PUBLIC
     hardware_interface::return_type write(const rclcpp::Time& time, const
     rclcpp::Duration& period) override;
 

@@ -484,10 +484,10 @@ namespace hibachi_base
 
                 double temp_fl, temp_fr, temp_rl, temp_rr;
 
-                temp_fl = ((int16_t)((((uint16_t)frames[i].data[5]) << 8) | (((uint16_t)frames[i].data[4])))) / 1000.0;
-                temp_fr = ((int16_t)((((uint16_t)frames[i].data[7]) << 8) | (((uint16_t)frames[i].data[6])))) / 1000.0;
-                temp_rl = ((int16_t)((((uint16_t)frames[i].data[9]) << 8) | (((uint16_t)frames[i].data[8])))) / 1000.0;
-                temp_rr = ((int16_t)((((uint16_t)frames[i].data[11]) << 8) | (((uint16_t)frames[i].data[10])))) / 1000.0;
+                temp_fl = ((int16_t)((((uint16_t)frames[i].data[5]) << 8) | (((uint16_t)frames[i].data[4])))) / 100.0;
+                temp_fr = ((int16_t)((((uint16_t)frames[i].data[7]) << 8) | (((uint16_t)frames[i].data[6])))) / 100.0;
+                temp_rl = ((int16_t)((((uint16_t)frames[i].data[9]) << 8) | (((uint16_t)frames[i].data[8])))) / 100.0;
+                temp_rr = ((int16_t)((((uint16_t)frames[i].data[11]) << 8) | (((uint16_t)frames[i].data[10])))) / 100.0;
 
                 if (rcvd_command == 0x7004)
                 {
@@ -532,10 +532,10 @@ namespace hibachi_base
         message[2] = (uint8_t)(payload_length & 0xFF);
         message[3] = (uint8_t)((payload_length >> 8) & 0xFF);
 
-        int16_t temp_fl = (int16_t) (hw_joints[0].command * 1000);
-        int16_t temp_fr = (int16_t) (hw_joints[1].command * 1000);
-        int16_t temp_rl = (int16_t) (hw_joints[2].command * 1000);
-        int16_t temp_rr = (int16_t) (hw_joints[3].command * 1000);
+        int16_t temp_fl = (int16_t) (hw_joints[0].command * 100);
+        int16_t temp_fr = (int16_t) (hw_joints[1].command * 100);
+        int16_t temp_rl = (int16_t) (hw_joints[2].command * 100);
+        int16_t temp_rr = (int16_t) (hw_joints[3].command * 100);
         
         RCLCPP_INFO(rclcpp::get_logger(HW_NAME), "Sending %d, %d, %d, %d",
             temp_fl, temp_fr, temp_rl, temp_rr);
