@@ -162,7 +162,7 @@ def generate_launch_description():
    ld.add_action(teleop_twist_mux_launch)
    ld.add_action(teleop_joy_launch)
    # ld.add_action(teleop_twist_stamper_launch)
-   ld.add_action(twist_stamper_cpp_launch)
+   # ld.add_action(twist_stamper_cpp_launch)
    ld.add_action(xsens_mti630_launch)
    ld.add_action(rplidar_s3_launch)
    ld.add_action(ekf_launch)
