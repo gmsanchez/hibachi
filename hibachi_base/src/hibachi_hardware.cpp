@@ -9,14 +9,14 @@ namespace hibachi_base
 {
     static std::string HW_NAME = "HW_NAME";
 
-    CallbackReturn HibachiHardware::on_init(const hardware_interface::HardwareInfo & hardware_info) {
-        if (hardware_interface::SystemInterface::on_init(hardware_info) !=
-            CallbackReturn::SUCCESS) {
-            return CallbackReturn::ERROR;
+    hardware_interface::CallbackReturn HibachiHardware::on_init(const hardware_interface::HardwareComponentInterfaceParams & params) {
+        if (hardware_interface::SystemInterface::on_init(params) != 
+        hardware_interface::CallbackReturn::SUCCESS) {
+            return hardware_interface::CallbackReturn::ERROR;
         }
         
         // Set hardware name
-        HW_NAME = info_.name;
+        std::string HW_NAME = get_hardware_info().name;
         RCLCPP_DEBUG(rclcpp::get_logger(HW_NAME), "Hardware name: %s", info_.name.c_str());
         RCLCPP_DEBUG(rclcpp::get_logger(HW_NAME), "Number of Joints %zu", info_.joints.size());
 

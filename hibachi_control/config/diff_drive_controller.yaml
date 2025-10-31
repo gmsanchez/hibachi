@@ -59,22 +59,20 @@ hibachi_base_controller:
       x:
         has_velocity_limits: true
         has_acceleration_limits: true
-        has_jerk_limits: false
         # top speed is around 0.42 m/s
         max_velocity: 0.35 # m/s
         # min_velocity -  When unspecified, -max_velocity is used
         max_acceleration: 1.0 # m/s^2
         # min_acceleration - When unspecified, -max_acceleration is used.
-        max_jerk: 0.0 # m/s^3
+        max_jerk: NAN # m/s^3
 
     angular:
       z:
         has_velocity_limits: true
         has_acceleration_limits: true
-        has_jerk_limits: false
         # top angular speed is around 1.7684 rad/s
         max_velocity: 1.7 # rad/s
         # min_velocity -  When unspecified, -max_velocity is used
         max_acceleration: 3.0 # rad/s^2
         # min_acceleration - When unspecified, -max_acceleration is used.
-        max_jerk: 0.0 # rad/s^3
+        max_jerk: NAN # rad/s^3

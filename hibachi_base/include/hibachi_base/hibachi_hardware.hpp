@@ -26,7 +26,7 @@ class HibachiHardware : public hardware_interface::SystemInterface
   public:
     RCLCPP_SHARED_PTR_DEFINITIONS(HibachiHardware)
 
-    CallbackReturn on_init(const hardware_interface::HardwareInfo& hardware_info) override;
+    CallbackReturn on_init(const hardware_interface::HardwareComponentInterfaceParams & params) override;
 
     /* // HARDWARE_INTERFACE_PUBLIC
     // CallbackReturn on_configure(const rclcpp_lifecycle::State& previous_state)
