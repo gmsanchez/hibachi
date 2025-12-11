@@ -21,14 +21,14 @@
     </sensor>
 </gazebo>
 
-<gazebo reference="rplidar_a1_link">
-    <sensor name="rplidar_a1" type="gpu_lidar">
+<gazebo reference="rplidar_s3_link">
+    <sensor name="rplidar_s3" type="gpu_lidar">
         <pose>0 0 0.0455 0 0 0</pose>
         <always_on>1</always_on>
         <update_rate>5</update_rate>
         <visualize>true</visualize>
         <topic>scan</topic>
-        <gz_frame_id>rplidar_a1_link</gz_frame_id>
+        <gz_frame_id>rplidar_s3_link</gz_frame_id>
         <lidar>
             <scan>
                 <horizontal>
